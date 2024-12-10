@@ -30,7 +30,7 @@
       font-weight: bold;
     }
     input, button {
-      width: 100%;
+      width: calc(50% - 10px);
       padding: 10px;
       margin: 5px 0 20px;
       border: 1px solid #ccc;
@@ -45,6 +45,10 @@
     }
     button:hover {
       background-color: #e94e2f;
+    }
+    .button-group {
+      display: flex;
+      justify-content: space-between;
     }
     .result {
       margin-top: 20px;
@@ -73,7 +77,10 @@
     <label for="people">Number of People:</label>
     <input type="number" id="people" placeholder="Enter number of people">
 
-    <button onclick="calculate()">Calculate</button>
+    <div class="button-group">
+      <button onclick="calculate()">Calculate</button>
+      <button onclick="resetValues()">Reset Values</button>
+    </div>
 
     <div class="result" id="result">
       <p>Cost per square inch of pizza: $<span id="costPerSqInch">0</span></p>
@@ -95,7 +102,6 @@
         return;
       }
 
-      // Calculate cost per square inch of pizza and total pizzas to order.
       const radius = size / 2;
       const area = Math.PI * Math.pow(radius, 2);
       const costPerSqInch = (price / area).toFixed(2);
@@ -107,6 +113,16 @@
       document.getElementById('costPerSqInch').innerText = costPerSqInch;
       document.getElementById('chargePerSlice').innerText = chargePerSlice;
       document.getElementById('totalPizzas').innerText = totalPizzas;
+    }
+
+    function resetValues() {
+      document.getElementById('price').value = '';
+      document.getElementById('size').value = '';
+      document.getElementById('slices').value = '';
+      document.getElementById('people').value = '';
+      document.getElementById('costPerSqInch').innerText = '0';
+      document.getElementById('chargePerSlice').innerText = '0';
+      document.getElementById('totalPizzas').innerText = '0';
     }
   </script>
 </body>
